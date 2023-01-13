@@ -2,34 +2,25 @@
 import "./App.css";
 import React, { useEffect, useState } from "react";
 import Axios from "axios"
-
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Home } from "./pages/Home";
+import { Menu } from "./pages/Menu";
+import { Contact } from "./pages/Contact";
+import { Navbar } from "./pages/Navbar";
 
 function App() {
-  
-  const [reason, setReason] = useState("");
-
-  const fetchEx = (excuse) => {
-
-    Axios.get(`https://excuser-three.vercel.app/v1/excuse/${excuse}/`).then((res) => {
-      setReason(res.data[0].excuse);
-    });
-  };
 
   return (
-    <div className="App container">
-      
-      <p className="display-3 m-2">Generate an Excuse</p>
-      <button className="btn btn-primary m-3 p-2" onClick={() => fetchEx("family")}> Family </button>
-      <button className="btn btn-primary m-3 p-2" onClick={() => fetchEx("office")}> Office </button>
-      <button className="btn btn-primary m-3 p-2" onClick={() => fetchEx("children")}> Children </button>
-      <button className="btn btn-primary m-3 p-2" onClick={() => fetchEx("college")}> College </button>
-      <button className="btn btn-primary m-3 p-2" onClick={() => fetchEx("party")}> Party </button>
-      <button className="btn btn-primary m-3 p-2" onClick={() => fetchEx("funny")}> Funny </button>
-      <button className="btn btn-primary m-3 p-2" onClick={() => fetchEx("unbelievable")}> Unbelievable </button>
-      <button className="btn btn-primary m-3 p-2" onClick={() => fetchEx("developers")}> Developers </button>
-      <button className="btn btn-primary m-3 p-2" onClick={() => fetchEx("gaming")}> Gaming </button>
-      
-      <h1>{reason}</h1>
+    <div className="App">
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/menu" element={<Menu />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="*" element={<h1 className="display-1 text-danger">Error 404! Page not Found!</h1>} />
+        </Routes>
+      </Router>
     </div>
   );
 }
