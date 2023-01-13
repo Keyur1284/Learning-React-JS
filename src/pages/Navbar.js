@@ -12,7 +12,7 @@ export const Navbar = () => {
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <Link className="nav-link active" aria-current="page" to="/">Home</Link>
-                <Link className="nav-link" to="/menu">Menu</Link>
+                <Link className="nav-link" to="/profile">Profile</Link>
                 <Link className="nav-link" to="/contact">Contact</Link>
               </ul>
               <form class="d-flex" role="search">
