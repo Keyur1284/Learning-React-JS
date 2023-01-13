@@ -6,30 +6,30 @@ import Axios from "axios"
 
 function App() {
   
-  const [user, setUser] = useState("");
-  const [predictedAge, setPredictedAge] = useState(null);
+  const [reason, setReason] = useState("");
 
-  const predictor = () => {
+  const fetchEx = (excuse) => {
 
-    Axios.get(`https://api.agify.io/?name=${user}`).then((res) => {
-      setPredictedAge(res.data);
+    Axios.get(`https://excuser-three.vercel.app/v1/excuse/${excuse}/`).then((res) => {
+      setReason(res.data[0].excuse);
     });
   };
 
   return (
     <div className="App container">
       
-      <input placeholder="Ex. Keyur" onChange={(event) => setUser(event.target.value)} />
-      <button className="btn btn-primary m-3 p-2" onClick={predictor}> Predict Age </button>
-
-      <h1>Name :- {predictedAge?.name}</h1>
-      <h1>Predicted Age :- {predictedAge?.age}</h1>
-      <h1>Count :- {predictedAge?.count}</h1>
-
-      <div>
-
-      </div>
-
+      <p className="display-3 m-2">Generate an Excuse</p>
+      <button className="btn btn-primary m-3 p-2" onClick={() => fetchEx("family")}> Family </button>
+      <button className="btn btn-primary m-3 p-2" onClick={() => fetchEx("office")}> Office </button>
+      <button className="btn btn-primary m-3 p-2" onClick={() => fetchEx("children")}> Children </button>
+      <button className="btn btn-primary m-3 p-2" onClick={() => fetchEx("college")}> College </button>
+      <button className="btn btn-primary m-3 p-2" onClick={() => fetchEx("party")}> Party </button>
+      <button className="btn btn-primary m-3 p-2" onClick={() => fetchEx("funny")}> Funny </button>
+      <button className="btn btn-primary m-3 p-2" onClick={() => fetchEx("unbelievable")}> Unbelievable </button>
+      <button className="btn btn-primary m-3 p-2" onClick={() => fetchEx("developers")}> Developers </button>
+      <button className="btn btn-primary m-3 p-2" onClick={() => fetchEx("gaming")}> Gaming </button>
+      
+      <h1>{reason}</h1>
     </div>
   );
 }
