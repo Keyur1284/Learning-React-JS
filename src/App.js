@@ -1,59 +1,35 @@
 /* eslint-disable no-unused-vars */
 import "./App.css";
-import React, { useState } from "react";
-import { Task } from "./Task";
+import React, { useEffect, useState } from "react";
+import Axios from "axios"
+
 
 function App() {
-  const [toDoList, setToDoList] = useState([]);
-  const [newTask, setNewTask] = useState("");
+  
+  const [user, setUser] = useState("");
+  const [predictedAge, setPredictedAge] = useState(null);
 
-  const handleChange = (event) => {
-      setNewTask(event.target.value);
-  }
+  const predictor = () => {
 
-  const addTask = () => {
-    const task = {
-
-      id: toDoList.length === 0 ? 1 : toDoList[toDoList.length - 1].id + 1,
-      name: newTask,
-      status: false,
-    };
-    setToDoList( [...toDoList, task]);
-  }
-
-  const deleteTask = (id) => {
-    setToDoList(toDoList.filter((task) => task.id !== id));
-  }
-
-  const completeTask = (id) => {
-    setToDoList(toDoList.map((task) => {
-      if(task.id === id)
-      {
-        return {...task, status: true};
-      }
-
-      else
-      {
-        return task;
-      }
-    }))
-  }
+    Axios.get(`https://api.agify.io/?name=${user}`).then((res) => {
+      setPredictedAge(res.data);
+    });
+  };
 
   return (
-    <div className="App">
-      <div className="addTask m-5">
-        <input onChange = {handleChange} />
-        <button className="mx-2 btn btn-primary" onClick={addTask}>Add Task</button>
+    <div className="App container">
+      
+      <input placeholder="Ex. Keyur" onChange={(event) => setUser(event.target.value)} />
+      <button className="btn btn-primary m-3 p-2" onClick={predictor}> Predict Age </button>
+
+      <h1>Name :- {predictedAge?.name}</h1>
+      <h1>Predicted Age :- {predictedAge?.age}</h1>
+      <h1>Count :- {predictedAge?.count}</h1>
+
+      <div>
+
       </div>
-      <div className="list">
-        {
-          toDoList.map((task) => {
-            return (            
-              <Task name={task.name} id={task.id} status={task.status} deleteTask={deleteTask} completeTask={completeTask} />
-            );
-          })
-        }
-      </div>
+
     </div>
   );
 }
