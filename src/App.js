@@ -5,6 +5,7 @@ import Axios from "axios"
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Home } from "./pages/Home";
 import { Profile } from "./pages/Profile";
+import { Form } from "./pages/Form";
 import { Contact } from "./pages/Contact";
 import { Navbar } from "./pages/Navbar";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -25,6 +26,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/form" element={<Form />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<h1 className="display-1 text-danger">Error 404! Page not Found!</h1>} />
         </Routes>

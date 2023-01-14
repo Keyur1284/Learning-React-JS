@@ -13,6 +13,7 @@ export const Navbar = () => {
               <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <Link className="nav-link active" aria-current="page" to="/">Home</Link>
                 <Link className="nav-link" to="/profile">Profile</Link>
+                <Link className="nav-link" to="/form">Form</Link>
                 <Link className="nav-link" to="/contact">Contact</Link>
               </ul>
               <form className="d-flex" role="search">
